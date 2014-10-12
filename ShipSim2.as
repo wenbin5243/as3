@@ -1,21 +1,25 @@
-package{
+﻿package{
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
 
-	public class ShipSim extends Sprite{
+	public class ShipSim2 extends Sprite{
 		private var ship:Ship;
 		private var vr:Number=0;
 		private var thrust:Number=0;
 		private var vx:Number=0;
 		private var vy:Number=0;
 		
-		public function ShipSim(){
+		public function ShipSim2(){
 			init();
 		}
 		
 		private function init():void{
+			stage.scaleMode=StageScaleMode.NO_SCALE;
+			stage.align=StageAlign.TOP_LEFT;
 			ship=new Ship();
 			addChild(ship);
 			ship.x=50;
@@ -56,10 +60,24 @@ package{
 			var angle:Number=ship.rotation*Math.PI/180;
 			var ax:Number=Math.cos(angle)*thrust;
 			var ay:Number=Math.sin(angle)*thrust;
-			vx+=adx;
+			vx+=ax;
 			vy+=ay;
 			ship.x+=vx;
 			ship.y+=vy;
+			var left:Number=0;
+			var right:Number=stage.stageWidth;
+			var top:Number=0;
+			var bottom:Number=stage.stageHeight;
+			if(ship.x-ship.width/2>right){
+				ship.x=left-ship.width/2;
+			}else if(ship.x+ship.width/2<left){
+				ship.x=right+ship.width/2;
+			}
+			if(ship.y-ship.height/2>bottom){
+				ship.y=top-ship.height/2;
+			}else if(ship.y<top-ship.height/2){
+				ship.y=bottom+ship.height/2;
+			}
 		}
 	}
 }

@@ -1,8 +1,10 @@
 ﻿package{
 	import flash.display.Sprite;
 	public class Ball extends Sprite{
-		private var radius:Number;
+		public var radius:Number;
 		private var color:uint;
+		public var vx:Number=0;
+		public var vy:Number=0;
 		public function Ball(radius:Number=40,color:uint=0xff0000){
 			this.radius=radius;
 			this.color=color;
